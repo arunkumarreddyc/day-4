@@ -1,0 +1,87 @@
+QUESTION:	1.How to compare two JSON have the same properties without order?
+			a. var obj1 = { name: "Person 1", age:5 };
+			b. var obj2 = { age:5, name: "Person 1" };
+
+
+CODE:
+let _ = require('lodash')
+var obj1 = { name: "Person 1", age:5 };
+var obj2 = { age:5, name: "Person 1" };
+console.log(_.isEqual(obj1, obj2));
+
+OUTPUT:
+true
+
+DESCRIPTION:
+To compare the given objects use lodash which can be downloaded from npmjs.com or we can use stringify method also
+
+
+QUESTION:	2.Use the rest countries API url -> https://restcountries.eu/rest/v2/all and display all the country flags in console
+
+
+CODE:
+// 1.initialize a xml http request
+var xhr = new XMLHttpRequest();
+
+// Open a request
+xhr.open("GET", "https://restcountries.com/v2/all");
+
+xhr.onload = function () {
+  //please provide me data if my request lies in range 200-299
+  if (xhr.status >= 200 && xhr.status < 300) {
+    let data = JSON.parse(this.response);
+    // console.log(xhr.response);
+    for (let i = 0; i < data.length; i++) {
+      let flagsOfCountries = data[i];
+      
+      console.log(
+        `${flagsOfCountries.flag} `
+      );
+    }
+  }
+};
+
+//sent the rquest to server
+xhr.send();
+
+
+
+OUTPUT:
+the above code prints flags adress in the console
+
+
+
+
+QUESTION:  	3.Use the same rest countries and print all countries name, region, sub region and population
+
+
+CODE:
+// 1.initialize a xml http request
+var xhr = new XMLHttpRequest();
+
+// Open a request
+xhr.open("GET", "https://restcountries.com/v2/all");
+
+xhr.onload = function () {
+  //please provide me data if my request lies in range 200-299
+  if (xhr.status >= 200 && xhr.status < 300) {
+    let details = JSON.parse(this.response);
+    // console.log(xhr.response);
+    for (let i = 0; i < details.length; i++) {
+      let country = details[i];
+      console.log(
+        `${country.name} - ${country.region} - ${country.subregion} - ${country.population}`
+      );
+    }
+  }
+};
+
+//sent the rquest to server
+xhr.send();
+
+
+OUTPUT:
+the output can be seen in console in the order country name,country region,country population
+
+DESCRIPTION:
+open the above js code in the console with an index.html file to get the result
